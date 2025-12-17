@@ -1,0 +1,11 @@
+name - uniq name
+temp
+aux_temp - Fridge temp (Tilt?)
+ext_temp - Room temp
+gravity
+pressure
+pressure_unit
+report_source = craftbeerpi
+device_state - heating, cooling, on, off
+temp_target
+temp_unit
