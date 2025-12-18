@@ -37,12 +37,12 @@ class CustomSensor(CBPiExtension):
             logger.info("Start")
             print("Start2")
 
-            PRESSURE_HW = self.cbpi.config.get("Thresholds_Pressure_HW", None)
-            PRESSURE_LW = self.cbpi.config.get("Thresholds_Pressure_LW", None)
-            TEMP_HW = self.cbpi.config.get("Thresholds_Temp_HW", None)
-            TEMP_LW = self.cbpi.config.get("Thresholds_Temp_LW", None)
-            TEMP_FERMENTER_DIV = self.cbpi.config.get("Thresholds_Temp_Fermenter_DIV", None)
-            PRESSURE_FERMENTER_DIV = self.cbpi.config.get("Thresholds_Pressure_Fermenter_DIV", None)
+            PRESSURE_HW = self.cbpi.config.get("Threshold_Pressure_HW", None)
+            PRESSURE_LW = self.cbpi.config.get("Threshold_Pressure_LW", None)
+            TEMP_HW = self.cbpi.config.get("Threshold_Temp_HW", None)
+            TEMP_LW = self.cbpi.config.get("Threshold_Temp_LW", None)
+            TEMP_FERMENTER_DIV = self.cbpi.config.get("Threshold_Temp_Fermenter_DIV", None)
+            PRESSURE_FERMENTER_DIV = self.cbpi.config.get("Threshold_Pressure_Fermenter_DIV", None)
 
             for fermenter in self.cbpi.fermenter.data:
                 logger.info("Fermenter")
