@@ -19,6 +19,7 @@ class CustomSensor(CBPiExtension):
         self._task = asyncio.create_task(self.run())
 
     async def run(self):
+        logger.info('Starting Warnings background task!!!!!!!!!!!!!!!!!!!!!')
         plugin = await self.cbpi.plugin.load_plugin_list("cbpi4-threshold-warnings")
         self.version=plugin[0].get("Version","0.0.0")
         self.name=plugin[0].get("Name","cbpi4-threshold-warnings")
