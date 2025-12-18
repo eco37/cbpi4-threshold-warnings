@@ -51,13 +51,13 @@ class CustomSensor(CBPiExtension):
                 if fermenter.name != None or fermenter.name.strip() != "":
                     fermenter_name = fermenter.name
 
-                logger.info("NAME")
+                print("NAME")
 
-                logger.info(fermenter.sensor)
+                print(fermenter.sensor)
                 
-                logger.info("MID")
+                print("MID")
 
-                logger.info(fermenter.pressure_sensor)
+                print(fermenter.pressure_sensor)
                 
                 if fermenter.sensor != None and fermenter.sensor.strip() != "":
                     try:
@@ -66,6 +66,7 @@ class CustomSensor(CBPiExtension):
                         if temp != None and temp != "":
                             if TEMP_HW != None and TEMP_HW != "":
                                 if temp > TEMP_HW:
+                                    print("TEMP HW")
                                     self.cbpi.notify("Threshold Warning", "{}: Temp High Warning {}".format(fermenter_name, temp), NotificationType.DANGER)
                             if TEMP_LW != None and TEMP_LW != "":
                                 if temp < TEMP_LW:
