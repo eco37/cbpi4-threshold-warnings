@@ -78,7 +78,7 @@ class CustomSensor(CBPiExtension):
                             try:
                                 if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
                                     if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
-                                        if abs(fermenter.target_temp - temp) > float(TEMP_FERMENTER_DIV):
+                                        if abs(float(fermenter.target_temp) - float(temp)) > float(TEMP_FERMENTER_DIV):
                                             self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Target Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
 
                             except Exception as e:
