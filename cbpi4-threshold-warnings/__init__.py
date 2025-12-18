@@ -59,6 +59,7 @@ class CustomSensor(CBPiExtension):
                 print("MID")
 
                 print(fermenter)
+                print(fermenter.target_pressure)
                 
                 if fermenter.sensor != None and fermenter.sensor.strip() != "":
                     try:
