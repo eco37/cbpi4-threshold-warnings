@@ -79,7 +79,7 @@ class CustomSensor(CBPiExtension):
                                 if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
                                     if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
                                         if abs(fermenter.target_temp, temp) > float(TEMP_FERMENTER_DIV):
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Temp Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
+                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Target Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Temp: " + str(e))
@@ -96,14 +96,14 @@ class CustomSensor(CBPiExtension):
                                 if float(pressure) > float(PRESSURE_HW):
                                     self.cbpi.notify("Threshold Warning", "{}: Pressure High Warning {}".format(fermenter_name, pressure), NotificationType.ERROR)
                             if PRESSURE_LW != None and PRESSURE_LW != "":
-                                if float(pressure) > float(PRESSURE_LW):
+                                if float(pressure) < float(PRESSURE_LW):
                                     self.cbpi.notify("Threshold Warning", "{}: Pressure Low Warning {}".format(fermenter_name, pressure), NotificationType.ERROR)
 
                             try:
                                 if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
                                     if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
                                         if abs(fermenter.target_pressure, pressure) > float(PRESSURE_FERMENTER_DIV):
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Pressure Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.WARNING)
+                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Target Pressure Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Pressure: " + str(e))
@@ -221,14 +221,14 @@ class CustomSensor(CBPiExtension):
         if TEMP_FERMENTER_DIV is None:
             logger.info("INIT Temp Fermenter DIV")
             try:
-                await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", "", type=ConfigType.STRING, description="Temp Fermenter Step Diviation Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", "", type=ConfigType.STRING, description="Temp Fermenter Target Diviation Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:
-                    await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", TEMP_FERMENTER_DIV, type=ConfigType.STRING, description="Temp Fermenter Step Diviation Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", TEMP_FERMENTER_DIV, type=ConfigType.STRING, description="Temp Fermenter Target Diviation Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
@@ -236,14 +236,14 @@ class CustomSensor(CBPiExtension):
         if PRESSURE_FERMENTER_DIV is None:
             logger.info("INIT Pressure Fermenter DIV")
             try:
-                await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", "", type=ConfigType.STRING, description="Pressure Fermenter Step Diviation Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", "", type=ConfigType.STRING, description="Pressure Fermenter Target Diviation Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:
-                    await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", PRESSURE_FERMENTER_DIV, type=ConfigType.STRING, description="Pressure Fermenter Step Diviation Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", PRESSURE_FERMENTER_DIV, type=ConfigType.STRING, description="Pressure Fermenter Target Diviation Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
