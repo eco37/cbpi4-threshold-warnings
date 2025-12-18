@@ -19,7 +19,6 @@ class CustomSensor(CBPiExtension):
         self._task = asyncio.create_task(self.run())
 
     async def run(self):
-        logger.info('Starting Warnings background task!!!!!!!!!!!!!!!!!!!!!')
         plugin = await self.cbpi.plugin.load_plugin_list("cbpi4-threshold-warnings")
         self.version=plugin[0].get("Version","0.0.0")
         self.name=plugin[0].get("Name","cbpi4-threshold-warnings")
@@ -32,9 +31,11 @@ class CustomSensor(CBPiExtension):
 
         await asyncio.sleep(5)
         while True:
+            print("Start1")
             await self.threshold_warnings_settings()
 
             logger.info("Start")
+            print("Start2")
 
             PRESSURE_HW = self.cbpi.config.get("Thresholds_Pressure_HW", None)
             PRESSURE_LW = self.cbpi.config.get("Thresholds_Pressure_LW", None)
@@ -45,6 +46,7 @@ class CustomSensor(CBPiExtension):
 
             for fermenter in self.cbpi.fermenter.data:
                 logger.info("Fermenter")
+                print("Start3")
                 fermenter_name = "<NO NAME>"
                 if fermenter.name != None or fermenter.name.strip() != "":
                     fermenter_name = fermenter.name
