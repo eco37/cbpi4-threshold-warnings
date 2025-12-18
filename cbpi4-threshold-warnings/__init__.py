@@ -8,6 +8,7 @@ import asyncio
 import random
 from cbpi.api import *
 from cbpi.api.config import ConfigType
+from cbpi.api.dataclasses import NotificationType
 
 logger = logging.getLogger(__name__)
 
