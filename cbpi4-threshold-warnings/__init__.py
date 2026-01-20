@@ -102,40 +102,10 @@ class CustomSensor(CBPiExtension):
                     except Exception as e:
                         logger.error("Error Pressure: " + str(e))
                 
-#                 logger.info("COOLER")
-#                 logger.info(fermenter.cooler)
-#                 if fermenter.cooler != None and fermenter.cooler.strip() != "":
-#                     try:
-#                         logger.info("COOLER")
-#                         cooler_actor = self.cbpi.actor.find_by_id(fermenter.cooler)
-#                         cooler_state = cooler_actor.instance.state
-#                     except Exception as e:
-#                         logger.error("COOLER ERROR: " + str(e))
-#
-#                 logger.info("HEATER")
-#                 logger.info(fermenter.heater)
-#                 if fermenter.heater != None and fermenter.heater.strip() != "":
-#                     logger.info("HEATER")
-#                     try:
-#                         heater_actor = self.cbpi.actor.find_by_id(fermenter.heater)
-#                         heater_state = heater_actor.instance.state
-#                     except Exception as e:
-#                         logger.error("HEATER ERROR: " + str(e))
-#
-#                 logger.info(cooler_state)
-#                 logger.info(heater_state)
-                #
-                # if heater_state and not cooler_state:
-                #     values["device_state"] = "Heating"
-                # elif cooler_state and not heater_state:
-                #     values["device_state"] = "Cooling"
-                # elif cooler_state and heater_state:
-                #     values["device_state"] = "Heating and Cooling!!!"
-
                 logger.info("DONE")
 
-            #await asyncio.sleep(900)
-            await asyncio.sleep(10)
+            await asyncio.sleep(900)
+            #await asyncio.sleep(10)
 
     async def threshold_warnings_settings(self):
         PRESSURE_HW = self.cbpi.config.get("Threshold_Pressure_HW", None)
@@ -148,14 +118,14 @@ class CustomSensor(CBPiExtension):
         if PRESSURE_HW is None:
             logger.info("INIT Pressure HW")
             try:
-                await self.cbpi.config.add("Threshold_Pressure_HW", "", type=ConfigType.STRING, description="Pressure High Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Pressure_HW", "", type=ConfigType.NUMBER, description="Pressure High Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:                
-                    await self.cbpi.config.add("Threshold_Pressure_HW", PRESSURE_HW, type=ConfigType.STRING, description="Pressure High Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Pressure_HW", PRESSURE_HW, type=ConfigType.NUMBER, description="Pressure High Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
@@ -163,14 +133,14 @@ class CustomSensor(CBPiExtension):
         if PRESSURE_LW is None:
             logger.info("INIT Pressure LW")
             try:
-                await self.cbpi.config.add("Threshold_Pressure_LW", "", type=ConfigType.STRING, description="Pressure Low Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Pressure_LW", "", type=ConfigType.NUMBER, description="Pressure Low Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:                
-                    await self.cbpi.config.add("Threshold_Pressure_LW", PRESSURE_LW, type=ConfigType.STRING, description="Pressure Low Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Pressure_LW", PRESSURE_LW, type=ConfigType.NUMBER, description="Pressure Low Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
@@ -181,14 +151,14 @@ class CustomSensor(CBPiExtension):
         if TEMP_HW is None:
             logger.info("INIT Temp HW")
             try:
-                await self.cbpi.config.add("Threshold_Temp_HW", "", type=ConfigType.STRING, description="Temp High Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Temp_HW", "", type=ConfigType.NUMBER, description="Temp High Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:
-                    await self.cbpi.config.add("Threshold_Temp_HW", TEMP_HW, type=ConfigType.STRING, description="Temp High Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Temp_HW", TEMP_HW, type=ConfigType.NUMBER, description="Temp High Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
@@ -196,14 +166,14 @@ class CustomSensor(CBPiExtension):
         if TEMP_LW is None:
             logger.info("INIT Temp LW")
             try:
-                await self.cbpi.config.add("Threshold_Temp_LW", "", type=ConfigType.STRING, description="Temp Low Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Temp_LW", "", type=ConfigType.NUMBER, description="Temp Low Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:
-                    await self.cbpi.config.add("Threshold_Temp_LW", TEMP_LW, type=ConfigType.STRING, description="Temp Low Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Temp_LW", TEMP_LW, type=ConfigType.NUMBER, description="Temp Low Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
@@ -214,14 +184,14 @@ class CustomSensor(CBPiExtension):
         if TEMP_FERMENTER_DIV is None:
             logger.info("INIT Temp Fermenter DIV")
             try:
-                await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", "", type=ConfigType.STRING, description="Temp Fermenter Target Diviation Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", "", type=ConfigType.NUMBER, description="Temp Fermenter Target Diviation Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:
-                    await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", TEMP_FERMENTER_DIV, type=ConfigType.STRING, description="Temp Fermenter Target Diviation Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Temp_Fermenter_DIV", TEMP_FERMENTER_DIV, type=ConfigType.NUMBER, description="Temp Fermenter Target Diviation Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
@@ -229,14 +199,14 @@ class CustomSensor(CBPiExtension):
         if PRESSURE_FERMENTER_DIV is None:
             logger.info("INIT Pressure Fermenter DIV")
             try:
-                await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", "", type=ConfigType.STRING, description="Pressure Fermenter Target Diviation Warning",source=self.name)
+                await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", "", type=ConfigType.NUMBER, description="Pressure Fermenter Target Diviation Warning",source=self.name)
             except Exception as e:
                 logger.warning('Unable to update config')
                 logger.error(e)
         else:
             if self.threshold_warnings_update == None or self.threshold_warnings_update != self.version:
                 try:
-                    await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", PRESSURE_FERMENTER_DIV, type=ConfigType.STRING, description="Pressure Fermenter Target Diviation Warning",source=self.name)
+                    await self.cbpi.config.add("Threshold_Pressure_Fermenter_DIV", PRESSURE_FERMENTER_DIV, type=ConfigType.NUMBER, description="Pressure Fermenter Target Diviation Warning",source=self.name)
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
