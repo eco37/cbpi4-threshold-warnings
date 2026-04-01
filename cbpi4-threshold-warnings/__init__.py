@@ -72,7 +72,7 @@ class CustomSensor(CBPiExtension):
                                     self.cbpi.notify("Threshold Warning", "{}: Temp Low Warning {}".format(fermenter_name, temp), NotificationType.ERROR)
 
                             try:
-                                if fermenter.brewname != None or fermenter.brewname.strip() != "":
+                                if fermenter.brewname != None and fermenter.brewname.strip() != "":
                                     if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
                                         if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
                                             if abs(float(fermenter.target_temp) - float(temp)) > float(TEMP_FERMENTER_DIV):
@@ -97,7 +97,7 @@ class CustomSensor(CBPiExtension):
                                     self.cbpi.notify("Threshold Warning", "{}: Pressure Low Warning {}".format(fermenter_name, pressure), NotificationType.ERROR)
 
                             try:
-                                if fermenter.brewname != None or fermenter.brewname.strip() != "":
+                                if fermenter.brewname != None and fermenter.brewname.strip() != "":
                                     if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
                                         if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
                                             if abs(float(fermenter.target_pressure) - float(pressure)) > float(PRESSURE_FERMENTER_DIV):
