@@ -45,8 +45,9 @@ class CustomSensor(CBPiExtension):
                 logger.info("Fermenter")
 
                 print("FPP {} {}".format(fermenter, fermenter.brewname))
-                #if not fermenter.state:
-                #    continue
+
+                if fermenter.brewname == None or fermenter.brewname.strip() == "":
+                    continue
 
                 fermenter_name = "<NO NAME>"
                 if fermenter.name != None or fermenter.name.strip() != "":
