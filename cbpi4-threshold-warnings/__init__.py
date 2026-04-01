@@ -44,7 +44,7 @@ class CustomSensor(CBPiExtension):
             for fermenter in self.cbpi.fermenter.data:
                 logger.info("Fermenter")
 
-                print(fermenter)
+                print("FPP {} {} {}".format(fermenter, fermenter.state, fermenter.name))
                 if not fermenter.state:
                     continue
 
