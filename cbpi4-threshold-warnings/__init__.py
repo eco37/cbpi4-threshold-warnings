@@ -46,8 +46,8 @@ class CustomSensor(CBPiExtension):
 
                 print("FPP {} {}".format(fermenter, fermenter.brewname))
 
-                if fermenter.brewname == None or fermenter.brewname.strip() == "":
-                    continue
+                #if fermenter.brewname == None or fermenter.brewname.strip() == "":
+                #    continue
 
                 fermenter_name = "<NO NAME>"
                 if fermenter.name != None or fermenter.name.strip() != "":
@@ -72,10 +72,11 @@ class CustomSensor(CBPiExtension):
                                     self.cbpi.notify("Threshold Warning", "{}: Temp Low Warning {}".format(fermenter_name, temp), NotificationType.ERROR)
 
                             try:
-                                if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
-                                    if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
-                                        if abs(float(fermenter.target_temp) - float(temp)) > float(TEMP_FERMENTER_DIV):
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Target Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
+                                if fermenter.brewname != None or fermenter.brewname.strip() != "":
+                                    if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
+                                        if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
+                                            if abs(float(fermenter.target_temp) - float(temp)) > float(TEMP_FERMENTER_DIV):
+                                                self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Target Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Temp: " + str(e))
@@ -96,10 +97,11 @@ class CustomSensor(CBPiExtension):
                                     self.cbpi.notify("Threshold Warning", "{}: Pressure Low Warning {}".format(fermenter_name, pressure), NotificationType.ERROR)
 
                             try:
-                                if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
-                                    if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
-                                        if abs(float(fermenter.target_pressure) - float(pressure)) > float(PRESSURE_FERMENTER_DIV):
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Target Pressure Diviation Warning {} - Target: {}".format(fermenter_name, pressure, fermenter.target_pressure), NotificationType.WARNING)
+                                if fermenter.brewname != None or fermenter.brewname.strip() != "":
+                                    if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
+                                        if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
+                                            if abs(float(fermenter.target_pressure) - float(pressure)) > float(PRESSURE_FERMENTER_DIV):
+                                                self.cbpi.notify("Threshold Warning", "{}: Fermenter Target Pressure Diviation Warning {} - Target: {}".format(fermenter_name, pressure, fermenter.target_pressure), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Pressure: " + str(e))
