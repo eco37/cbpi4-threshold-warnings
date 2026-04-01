@@ -44,6 +44,9 @@ class CustomSensor(CBPiExtension):
             for fermenter in self.cbpi.fermenter.data:
                 logger.info("Fermenter")
 
+                if not fermenter.state:
+                    continue
+
                 fermenter_name = "<NO NAME>"
                 if fermenter.name != None or fermenter.name.strip() != "":
                     fermenter_name = fermenter.name
